@@ -1,16 +1,95 @@
-# React + Vite
+MarchéBio Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application frontend développée avec React et Vite pour la plateforme MarchéBio.
 
-Currently, two official plugins are available:
+Prérequis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Avant de démarrer le projet, assurez-vous d'avoir installé :
 
-## React Compiler
+Node.js 22 ou supérieur
+npm
+Docker (optionnel)
+Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clonez le dépôt :
 
-## Expanding the ESLint configuration
+git clone <url-du-repository>
+cd marchebio-frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+Installez les dépendances :
+
+npm install
+
+Lancement en mode développement
+
+Démarrez le serveur de développement :
+
+npm run dev
+
+
+L'application sera accessible à l'adresse :
+
+http://localhost:5173
+
+Construction pour la production
+
+Générez les fichiers de production :
+
+npm run build
+
+
+Les fichiers compilés seront disponibles dans le dossier :
+
+dist/
+
+Prévisualisation de la version de production
+
+Après le build :
+
+npm run preview
+
+Vérification du code
+
+Exécutez ESLint :
+
+npm run lint
+
+Exécution avec Docker
+Construire l'image
+docker build -t marchebio-frontend .
+
+Démarrer le conteneur
+docker run -p 5173:5173 marchebio-frontend
+
+
+L'application sera accessible à l'adresse :
+
+http://localhost:5173
+
+Structure du projet
+marchebio-frontend/
+├── public/
+├── src/
+├── Dockerfile
+├── package.json
+├── vite.config.js
+└── README.md
+
+Technologies utilisées
+React
+Vite
+JavaScript (ES6+)
+ESLint
+Docker
+
+## 👤 Équipe
+
+**Evans NZATI** — Responsable Backend
+[GitHub](https://github.com/EvansNzati007) · [LinkedIn](https://linkedin.com/in/evansnzati)
+
+**NDONG NGOUA Andrew** - Responsable Frontend
+
+---
+
+*Projet tutoré — Master 2 Génie Logiciel, ESGIS Gabon.*
