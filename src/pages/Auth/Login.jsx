@@ -1,24 +1,81 @@
+import monImage from "../../assets/culture_afrique.png";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-    return (
-    <>
-        <div className='min-h-screen flex items-center justify-center bg-base-200'>
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                <div className="card-body">
-                    <h1 className='mt-4 text-3xl font-semibold tracking-tight text-balance text-gray-900'>Bienvenue sur MarchéBio</h1>
-                    <fieldset className="fieldset">
-                        <label className="label">Email</label>
-                        <input type="email" className="input" placeholder="jhonedoe@example.com" />
-                        <label className="label">Password</label>
-                        <input type="password" className="input" placeholder="Password" />
-                        <div><a className="link link-hover">Mot de passe oublié?</a></div>
-                        <button className="btn btn-neutral mt-4">Connexion</button>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-    </>
-    )
-}
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
 
-export default Login
+      <div className="flex bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl w-full">
+
+        
+        <div className="w-1/2 hidden md:block">
+          <img
+            src={monImage}
+            alt="Agriculture"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        
+        <div className="w-full md:w-1/2 p-10">
+
+          <h1 className="text-3xl font-bold text-center mb-2 text-black">
+            Bienvenue sur MarchéBio
+          </h1>
+
+          <p className="text-center text-gray-500 mb-8">
+            Entrez vos identifiants ici
+          </p>
+
+          <div className="space-y-4">
+
+
+            <div>
+              <label className="block mb-1 text-sm font-medium text-black">
+                Email
+              </label>
+
+              <input
+                type="email"
+                placeholder="Entrer votre email"
+                className="w-full border border-gray-300 rounded-lg p-3 text-black placeholder:text-gray-500 bg-white"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-1 text-sm font-medium text-black">
+                Password
+              </label>
+
+              <input
+                type="password"
+                placeholder="Votre mot de passe"
+                className="w-full border border-gray-300 rounded-lg p-3 text-black placeholder:text-gray-500 bg-white"
+              />
+            </div>
+
+            <button
+              className="w-full bg-green-600 text-white py-3 rounded-full hover:bg-green-700"
+            >
+              Connexion
+            </button>
+
+          </div>
+
+          <p className="text-center text-sm mt-6 text-black">
+            Avez-vous déjà un compte ?{" "}
+            <Link to="/login" className="text-green-600 hover:underline"
+            >
+              Connexion
+            </Link>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+};
+
+export default login;
