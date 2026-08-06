@@ -1,41 +1,80 @@
-import tomate from '@/assets/tomate.png'
+// src/components/public/Card.jsx
+import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
 
-const Card = () => {
-    const prixProduit = "12 500F"
-    const titreProduit = "Chaussure"
-    const descriptionProduit = "Chaussure utilisé dans un cadre sportif"
-    const imgSrc = "tomate"
-    const imgeAlt = "Tomate"
+const Card = ({ product }) => {
+    const { addToCart } = useCart();
+    const { isAuthenticated } = useAuth();
+
+    // Si pas de produit, afficher un placeholder
+    if (!product) {
+        return (
+            <div className="card bg-base-100 w-60 shadow-xl">
+                <figure className="px-6 pt-6">
+                    <div className="w-full h-40 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                        📷
+                    </div>
+                </figure>
+                <div className="card-body">
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                    <div className="flex justify-between items-center mt-2">
+                        <div className="h-5 bg-gray-200 rounded w-1/3"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const handleAddToCart = () => {
+
+        addToCart(product, 1);
+        alert(`✅ ${product.name} ajouté au panier !`);
+    };
 
     return (
-        <div className="card bg-base-100 w-60 shadow-sm">
-            <figure>
-                <img 
-                    className='bg-primary/70'
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt="Shoes" />
+        <div className="card bg-base-100 w-60 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure className="px-6 pt-6">
+                {product.photoData ? (
+                    <img
+                        src={product.photoData}
+                        alt={product.name}
+                        className="w-full h-40 object-cover rounded-xl"
+                    />
+                ) : (
+                    <div className="w-full h-40 bg-gray-200 rounded-xl flex items-center justify-center text-4xl">
+                        🥬
+                    </div>
+                )}
             </figure>
-            <div className="card-body">
-                <h2 className="card-title">
-                    {titreProduit}
-                    <div className="badge badge-secondary">{prixProduit}</div>
-                </h2>
-                <p>{descriptionProduit}</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        <p>Ajouter</p>
+            <div className="card-body p-4">
+                <h2 className="card-title text-base">{product.name}</h2>
+                <p className="text-sm text-gray-500 line-clamp-2">{product.description}</p>
+                <div className="flex justify-between items-center mt-2">
+          <span className="text-lg font-bold text-green-600">
+            {product.price} FCFA
+          </span>
+                    <span className="text-xs text-gray-400">
+            Stock: {product.quantity}
+          </span>
+                </div>
+                <div className="card-actions justify-end mt-2">
+                    <Link to={`/produits/${product.id}`} className="btn btn-ghost btn-sm">
+                        Détail
+                    </Link>
+                    <button
+                        className="btn btn-primary btn-sm"
+                        onClick={handleAddToCart}
+                        disabled={product.quantity === 0}
+                    >
+                        {product.quantity === 0 ? 'Rupture' : 'Ajouter'}
                     </button>
-                    {/* <div className="badge badge-outline">Fashion</div>
-                    <div className="badge badge-outline">Products</div> */}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Card;

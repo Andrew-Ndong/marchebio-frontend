@@ -1,8 +1,10 @@
-// src/hooks/useAuth.js
-import { useState, useEffect } from 'react';
-import { authService } from '../services/auth';
+// src/context/AuthContext.jsx
+import { createContext, useState, useContext, useEffect } from 'react';
+import { authService } from '../services/auth.js';
 
-export const useAuth = () => {
+const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -29,7 +31,7 @@ export const useAuth = () => {
         setUser(null);
     };
 
-    return {
+    const value = {
         user,
         loading,
         login,
@@ -40,4 +42,14 @@ export const useAuth = () => {
         isAcheteur: user?.role === 'ACHETEUR',
         isAdmin: user?.role === 'ADMIN',
     };
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within AuthProvider');
+    }
+    return context;
 };
